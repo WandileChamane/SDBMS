@@ -17,19 +17,19 @@
                 <div class="col-md-5">
                   <div class="form-group">
                     <label class="bmd-label-floating">Company (disabled)</label>
-                    <input type="text" [value]="data.company" class="form-control" disabled name="company" ngModel>
+                    <input type="text" [value]="company" class="form-control" disabled name="company" ngModel>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
                     <label class="bmd-label-floating">Username</label>
-                    <input type="text" value="{{data.username}}" class="form-control" name="company" ngModel>
+                    <input type="text" [value]="username" class="form-control" name="company" ngModel>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="bmd-label-floating">Email address</label>
-                    <input type="email" [value]="data.username" class="form-control" name="company" ngModel>
+                    <input type="email" [value]="email" class="form-control" name="company" ngModel>
                   </div>
                 </div>
               </div>
@@ -37,13 +37,13 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="bmd-label-floating">Fist Name</label>
-                    <input type="text" class="form-control" ngModel name="firstname">
+                    <input type="text" [value]="firstname" class="form-control" ngModel name="firstname">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="bmd-label-floating">Last Name</label>
-                    <input type="text" class="form-control" name="lastname" ngModel>
+                    <input type="text" [value]="lastname" class="form-control" name="lastname" ngModel>
                   </div>
                 </div>
               </div>
@@ -51,7 +51,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="bmd-label-floating">Adress</label>
-                    <input type="text" class="form-control" name="address" ngModel>
+                    <input type="text" [value]="address" class="form-control" name="address" ngModel>
                   </div>
                 </div>
               </div>
@@ -59,19 +59,19 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="bmd-label-floating">City</label>
-                    <input type="text" class="form-control" name="city" ngModel>
+                    <input type="text" [value]="city" class="form-control" name="city" ngModel>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="bmd-label-floating">Country</label>
-                    <input type="text" class="form-control" name="country" ngModel>
+                    <input type="text" [value]="country" class="form-control" name="country" ngModel>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="bmd-label-floating">Postal Code</label>
-                    <input type="text" class="form-control" name="postalcode" ngModel>
+                    <input type="text" [value]="postalcode" class="form-control" name="postalcode" ngModel>
                   </div>
                 </div>
               </div>

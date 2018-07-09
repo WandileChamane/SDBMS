@@ -11,10 +11,21 @@ import { ApiService } from "../api.service";
 export class UserComponent {
 	constructor(private regComp : RegisterComponent, private http: ApiService){}
     data = {};
+    company = "";
+    username= "";
+    email= "";
+    firstname="";
+    lastname="";
+    address="";
+    city="";
+    country="";
+    postalcode="";
+
     
     getUser(){
     	this.http.get("/getUpdatedUser/"+this.http.userId)
     	this.data = this.http.data;
+        console.log("this is the data from api"+this.http.data);
     	//console.log(this.http.data);
        //this.http.get('/getUser/'+)	
     }
