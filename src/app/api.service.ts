@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ApiService {
-  url = "http://localhost:3000";
+  url = "/";
   data = {};
   userId = "";
   constructor(private http: HttpClient,private router: Router) { }
@@ -26,7 +26,6 @@ export class ApiService {
   get(endpoint){
   	this.http.get(this.url+endpoint).subscribe(res => {
   		  this.userId = res['_id'];
-         
   		  console.log(res);
   	});
   }

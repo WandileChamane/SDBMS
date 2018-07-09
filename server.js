@@ -7,8 +7,17 @@ var db = mongojs('SDBMS', ['users']);
 var bodyParser = require('body-parser');
 var path = require('path');
 var cors = require('cors');
+var nodeMailer = require('nodemailer');
 
 // Serve only the static files form the dist directory
+app.all('*', function(req, res, next) {
+     var origin = req.get('origin'); 
+     res.header('Access-Control-Allow-Origin', origin);
+     res.header("Access-Control-Allow-Headers", "X-Requested-With");
+     res.header('Access-Control-Allow-Headers', 'Content-Type');
+     next();
+});
+
 app.use(express.static(__dirname + '/dist'));
 
 app.get('/*', function(req,res) {
@@ -35,6 +44,32 @@ app.post('/login', function (req, res) {
 app.post('/register', function (req, res) {
   db.users.insert(req.body, function(err, doc) {
     res.json(doc);
+    //NodeMailer
+      let transporter = nodeMailer.createTransport({
+          host: 'smtp.gmail.com',
+          port: 465,
+          secure: true,
+          auth: {
+              user: 'wandile.chamane@gmail.com',
+              pass: 'BonganiZulu123@'
+          }
+      });
+      let mailOptions = {
+          from: '"registrations" <registrations@smbd.com>', // sender address
+          to: req.body.email, // list of receivers
+          subject: 'Welcome to SDBMS', // Subject line
+          //text: req.body.body, // plain text body
+          html: '<b>Thanks For Registering</b><br /><p>Please click on the link below to activate your account or just copy and paste the link in your browser<br /><a href="http://sdbms.herokuapp.com/pages/user/'+res['_id']+'"></a></p>' // html body
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+              return console.log(error);
+          }
+          console.log('Message %s sent: %s', info.messageId, info.response);
+              //res.render('index');
+          });
+
   });
 });
 
@@ -76,6 +111,8 @@ app.get('/checkuser/:username', function (req, res) {
     res.json(docs);
   });
 });
+
+
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);

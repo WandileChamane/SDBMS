@@ -11,7 +11,7 @@ export const AppRoutes: Routes = [
       pathMatch: 'full',
     }, {
       path: '',
-      component: LoginComponent,
+      component: AdminLayoutComponent,
       children: [
           {
         path: '',
