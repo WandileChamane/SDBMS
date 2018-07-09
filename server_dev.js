@@ -5,17 +5,8 @@ var app = express();
 var mongojs = require('mongojs');
 var db = mongojs('SDBMS', ['users']);
 var bodyParser = require('body-parser');
-var path = require('path');
+
 var cors = require('cors');
-
-// Serve only the static files form the dist directory
-app.use(express.static(__dirname + '/dist'));
-
-app.get('/*', function(req,res) {
-    
-res.sendFile(path.join(__dirname+'/dist/index.html'));
-});
-
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -77,6 +68,6 @@ app.get('/checkuser/:username', function (req, res) {
   });
 });
 
-// Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
-console.log("Server running on port 8080");
+
+app.listen(3000);
+console.log("Server running on port 3000");

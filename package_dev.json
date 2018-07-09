@@ -8,14 +8,13 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "postinstall": "ng build --aot -prod",
+    "e2e": "ng e2e"
   },
-  
+  "postinstall": "ng build --aot -prod",
   "engines": {
     "node": "8.11.3",
     "npm": "5.6.0"
