@@ -3,12 +3,11 @@
 var express = require('express');
 var app = express();
 var mongojs = require('mongojs');
-var db = mongojs('SDBMS', ['users']);
+var db = mongojs('mongodb://mongouser:BonganiZulu12345@ds135061.mlab.com:35061/sdbms_mongo', ['users']);
 var bodyParser = require('body-parser');
 var path = require('path');
 var cors = require('cors');
 var nodeMailer = require('nodemailer');
-
 // Serve only the static files form the dist directory
 app.all('*', function(req, res, next) {
      var origin = req.get('origin'); 
