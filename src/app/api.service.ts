@@ -7,26 +7,40 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ApiService {
-  url = "/";
+  url = "http://localhost:8080";
   data = {};
+  company = "";
+  username= "";
+  email= "";
+  firstname="";
+  lastname="";
+  address="";
+  city="";
+  country="";
+  postalcode="";
+  phone="";
   userId = "";
   constructor(private http: HttpClient,private router: Router) { }
 
-  post(endpoint,user){
-  	console.log(endpoint+" entering "+user)
-  	this.http.post(this.url+endpoint,user).subscribe(res => {
-  		console.log("New user"+res['_id']);
-        if(res['_id']){this.userId = res['_id'];}
-        this.data = res;
-        this.router.navigate(['/pages/user/']);
-  		//console.log(res);
-  	});
+  post = (endpoint,user) => {
+      return new Promise((resolve, reject) => {
+         this.http.post(this.url+endpoint,user).subscribe(res => {
+            if(res['_id']){
+              this.userId = res['_id'];
+            }
+            resolve(res);
+        });
+      });
   };
 
-  get(endpoint){
-  	this.http.get(this.url+endpoint).subscribe(res => {
-  		  this.userId = res['_id'];
-  		  console.log(res);
-  	});
-  }
+  get = (endpoint) => {
+      return new Promise((resolve, reject) => {
+         this.http.get(this.url+endpoint).subscribe(res => {
+            if(res['_id']){
+              this.userId = res['_id'];
+            }
+            resolve(res);
+         });
+      });
+  };
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from "../../api.service";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-register-cmp',
@@ -16,9 +17,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     isEmailSent = "";
     isRegisterd = "";
     registeredDetails = this.apiService.data;
-    //formDetails = "";
     registerResult = "";
-    constructor(private apiService: ApiService){}
+    constructor(private apiService: ApiService, router: Router){}
 
     ngOnInit() {
       const body = document.getElementsByTagName('body')[0];
@@ -32,8 +32,18 @@ export class RegisterComponent implements OnInit, OnDestroy {
     };
     
      register(d){
-        this.apiService.post('/register',d);
-        console.log(this.registeredDetails);
+        // init additional info
+        d.company = "";
+        d.firstname = "";
+        d.lastname = "";
+        d.address = "";
+        d.city = "";
+        d.country = "";
+        d.postalcode = "";
+        this.apiService.post('/register',d).then(function(res){
+           this.router.navigate(['/pages/user/']);
+        });
+        
      };
     
 

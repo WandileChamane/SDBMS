@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RegisterComponent } from '../pages/register/register.component';
 import { ApiService } from "../api.service";
 
@@ -8,9 +8,9 @@ import { ApiService } from "../api.service";
     providers: [RegisterComponent]
 })
 
-export class UserComponent {
+export class UserComponent implements OnInit {
 	constructor(private regComp : RegisterComponent, private http: ApiService){}
-    data = {};
+    data = this.http.data;
     company = "";
     username= "";
     email= "";
@@ -20,18 +20,32 @@ export class UserComponent {
     city="";
     country="";
     postalcode="";
-
+    phone="";
+    _this = this._this
     
-    getUser(){
-    	this.http.get("/getUpdatedUser/"+this.http.userId)
-    	this.data = this.http.data;
-        console.log("this is the data from api"+this.http.data);
-    	//console.log(this.http.data);
-       //this.http.get('/getUser/'+)	
+    ngOnInit(){
+        this.getUser();
     }
-
+    getUser(){
+    	this.http.get("/getUpdatedUser/"+this.http.userId).then(function(res){ 
+            console.log("updated content!");
+    	this.data = res;
+        this.company = res['company'];
+        this.username= res['username'];
+        this.email= res['email'];
+        this.firstname=res['firstname'];
+        this.lastname=res['lastname'];
+        this.address=res['address'];
+        this.city=res['city'];
+        this.country=res['country'];
+        this.postalcode=res['postalcode'];
+        this.phone=res['phone'];
+        console.log("this is the data from api"+this.http.data);	
+        })
+    }
     updateUser(d){
-    	this.http.post("/updateUser/"+this.http.userId, d)
-    	this.getUser();
+    	this.http.post("/updateUser/"+this.http.userId, d).then(function(res){
+             UserComponent.bind(this).getUser()
+        });
     }
 }
