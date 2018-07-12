@@ -1,4 +1,6 @@
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
+import { ApiService } from "../../api.service";
+import { Router } from "@angular/router";
 
 declare var $: any;
 
@@ -12,10 +14,24 @@ export class LoginComponent implements OnInit, OnDestroy {
     private toggleButton: any;
     private sidebarVisible: boolean;
     private nativeElement: Node;
+    noLogin = false;
 
-    constructor(private element: ElementRef) {
+
+    constructor(private element: ElementRef, private api : ApiService, private router: Router) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
+    }
+
+    login(d){
+      this.api.post('/login',d).then(res => {
+          console.log(res[0]);
+
+          if(res[0] == null) this.noLogin = true
+              else{
+          this.api.userId = res[0]['_id'];
+          this.router.navigate(['/pages/user/']);
+          }
+      })
     }
 
     ngOnInit() {

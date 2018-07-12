@@ -8,7 +8,10 @@
               <i class="material-icons">perm_identity</i>
             </div>
             <h4 class="card-title">Edit Profile -
-              <small class="category">Complete your profile</small>
+              <small class="category"  *ngIf="!isActivatedMessage && !isUpdated">Complete your profile</small>
+              <small class="category"  style="color: green; font-weight: bold;" *ngIf="isActivatedMessage && !isUpdated">Your Account has been Activated!</small>
+
+              <small class="category"  style="color: green; font-weight: bold;" *ngIf="isUpdated">Your Account has been Updated!</small>
             </h4>
           </div>
           <div class="card-body">
@@ -16,20 +19,20 @@
               <div class="row">
                 <div class="col-md-5">
                   <div class="form-group">
-                    <label class="bmd-label-floating">Company (disabled)</label>
-                    <input type="text" [value]="company" class="form-control" disabled name="company" ngModel>
+                    <label class="bmd-label-floating">Phone</label>
+                    <input type="text"  [(ngModel)]="phone" class="form-control" name="company" ngModel>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
                     <label class="bmd-label-floating">Username</label>
-                    <input type="text" [value]="username" class="form-control" name="company" ngModel>
+                    <input type="text" [(ngModel)]="username" class="form-control" name="username" ngModel>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="bmd-label-floating">Email address</label>
-                    <input type="email" [value]="email" class="form-control" name="company" ngModel>
+                    <input type="email"  [(ngModel)]="email" class="form-control" name="email" ngModel>
                   </div>
                 </div>
               </div>
@@ -37,13 +40,13 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="bmd-label-floating">Fist Name</label>
-                    <input type="text" [value]="firstname" class="form-control" ngModel name="firstname">
+                    <input type="text"  [(ngModel)]="firstname" class="form-control" ngModel name="firstname">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="bmd-label-floating">Last Name</label>
-                    <input type="text" [value]="lastname" class="form-control" name="lastname" ngModel>
+                    <input type="text"  [(ngModel)]="lastname" class="form-control" name="lastname" ngModel>
                   </div>
                 </div>
               </div>
@@ -51,7 +54,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="bmd-label-floating">Adress</label>
-                    <input type="text" [value]="address" class="form-control" name="address" ngModel>
+                    <input type="text"  [(ngModel)]="address" class="form-control" name="address" ngModel>
                   </div>
                 </div>
               </div>
@@ -59,19 +62,19 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="bmd-label-floating">City</label>
-                    <input type="text" [value]="city" class="form-control" name="city" ngModel>
+                    <input type="text"  [(ngModel)]="city" class="form-control" name="city" ngModel>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="bmd-label-floating">Country</label>
-                    <input type="text" [value]="country" class="form-control" name="country" ngModel>
+                    <input type="text"  [(ngModel)]="country" class="form-control" name="country" ngModel>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="bmd-label-floating">Postal Code</label>
-                    <input type="text" [value]="postalcode" class="form-control" name="postalcode" ngModel>
+                    <input type="text"  [(ngModel)]="postalcode" class="form-control" name="postalcode" ngModel>
                   </div>
                 </div>
               </div>
@@ -80,7 +83,7 @@
                   <div class="form-group">
                     <label>About Me</label>
                     <div class="form-group">
-                      <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                      <label class="bmd-label-floating"> Edit your Bio below</label>
                       <textarea class="form-control" rows="5"></textarea>
                     </div>
                   </div>

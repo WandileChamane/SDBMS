@@ -15,10 +15,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
     passwordconf = "";
     formDetails = {};
     isEmailSent = "";
-    isRegisterd = "";
-    registeredDetails = this.apiService.data;
+    isRegisterd = false;
+    self = RegisterComponent.bind(this);
+    registeredDetails = this.api.data;
     registerResult = "";
-    constructor(private apiService: ApiService, router: Router){}
+    constructor(private api: ApiService, private router: Router){}
 
     ngOnInit() {
       const body = document.getElementsByTagName('body')[0];
@@ -33,17 +34,22 @@ export class RegisterComponent implements OnInit, OnDestroy {
     
      register(d){
         // init additional info
-        d.company = "";
+        d.company = "SDBMS";
         d.firstname = "";
         d.lastname = "";
         d.address = "";
         d.city = "";
         d.country = "";
         d.postalcode = "";
-        this.apiService.post('/register',d).then(function(res){
-           this.router.navigate(['/pages/user/']);
+        d.isActivated = false;
+
+        console.log("pass"+d.password);
+        this.api.post('/register',d).then(res => {
+          if(['_id']){
+              this.api.userId = res['_id'];
+            }
+           this.isRegisterd = true;
         });
-        
      };
     
 

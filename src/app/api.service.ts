@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 // HttpModule
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ApiService {
-  url = "http://localhost:8080";
+  url = "https://sdbms.herokuapp.com";
   data = {};
   company = "";
   username= "";
@@ -25,19 +25,29 @@ export class ApiService {
   post = (endpoint,user) => {
       return new Promise((resolve, reject) => {
          this.http.post(this.url+endpoint,user).subscribe(res => {
-            if(res['_id']){
-              this.userId = res['_id'];
-            }
             resolve(res);
         });
       });
   };
 
-  get = (endpoint) => {
+  getUrlParams(name){
+    let url = window.location.href;
+    name = name.replace(/[\[\]]/g,'\\$&');
+    let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+        if(!results) return null;
+        if(!results[2]) return '';
+
+        return decodeURIComponent(results[2].replace(/\+/g, ' ')); 
+  }
+
+  get = endpoint => {
+    console.log("entered get service")
       return new Promise((resolve, reject) => {
          this.http.get(this.url+endpoint).subscribe(res => {
-            if(res['_id']){
-              this.userId = res['_id'];
+            console.log("getUpdatedUser");
+            if(res[0]['_id']){
+              this.userId = res[0]['_id'];
             }
             resolve(res);
          });
