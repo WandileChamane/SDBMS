@@ -7,7 +7,7 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 //var request = require('browser-request')
 var request = require('request');
 //mongodb:/heroku_zqhwnlc1:BonganiZulu12345@ds233571.mlab.com:33571/heroku_zqhwnlc1
-var db = mongojs('mongodb:/heroku_zqhwnlc1:BonganiZulu12345@ds233571.mlab.com:33571/heroku_zqhwnlc1', ['users']);
+var db = mongojs('mongodb://heroku_zqhwnlc1:9icrop3b7ar3bhri5phsfip0c8@ds233571.mlab.com:33571/heroku_zqhwnlc1', ['users']);
 //var db = mongojs("SDBMS",['users']);
 var bodyParser = require('body-parser');
 var path = require('path');
