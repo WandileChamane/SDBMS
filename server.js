@@ -6,7 +6,8 @@ var mongojs = require('mongojs');
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 //var request = require('browser-request')
 var request = require('request');
-var db = mongojs('mongodb://mongouser:BonganiZulu12345@ds135061.mlab.com:35061/sdbms_mongo', ['users']);
+//mongodb:/heroku_zqhwnlc1:BonganiZulu12345@ds233571.mlab.com:33571/heroku_zqhwnlc1
+var db = mongojs('mongodb:/heroku_zqhwnlc1:BonganiZulu12345@ds233571.mlab.com:33571/heroku_zqhwnlc1', ['users']);
 //var db = mongojs("SDBMS",['users']);
 var bodyParser = require('body-parser');
 var path = require('path');
