@@ -121,7 +121,7 @@ app.post('/updateUser', function (req, res) {
      'country': req.body.country,
      'postalcode': req.body.postalcode,
      'isActivated': req.body.isActivated
-    }
+    };
  
  db.users.findAndModify({
     query: { "_id": {$eq:mongojs.ObjectId(id)}},
