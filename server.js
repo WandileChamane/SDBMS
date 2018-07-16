@@ -105,8 +105,8 @@ app.post('/register', function (req, res) {
 app.post('/updateUser', function (req, res) {
   console.log("update value:"+ req.body.city);
   var id = req.body.id;
-  db.users.update({"_id": {$eq:mongojs.ObjectId(id)}}, {$set:
-    {
+ 
+ var updateData = {
      'username': req.body.username,
      'email': req.body.email,
      'password': req.body.password,
@@ -122,9 +122,36 @@ app.post('/updateUser', function (req, res) {
      'postalcode': req.body.postalcode,
      'isActivated': req.body.isActivated
     }
-  });
-   res.json({"status":"Account Updated!"}); 
-});
+ 
+ db.users.findAndModify({
+    query: { "_id": {$eq:mongojs.ObjectId(id)}},
+    update: { $set: updateData },
+    new: true
+}, function (err, doc, lastErrorObject) {
+    // doc.tag === 'maintainer'
+  res.json({"status":"Account Updated!"});
+})
+ 
+//   db.users.update({"_id": {$eq:mongojs.ObjectId(id)}}, {$set:
+//     {
+//      'username': req.body.username,
+//      'email': req.body.email,
+//      'password': req.body.password,
+//      'passwordconf': req.body.passwordconf,
+//      'phone': req.body.phone,
+//      'usertype': req.body.usertype,
+//      'company': req.body.company,
+//      'firstname': req.body.firstname,
+//      'lastname': req.body.lastname,
+//      'address': req.body.address,
+//      'city': req.body.city,
+//      'country': req.body.country,
+//      'postalcode': req.body.postalcode,
+//      'isActivated': req.body.isActivated
+//     }
+//   });
+//    res.json({"status":"Account Updated!"}); 
+// });
 
 app.post('/activate', function (req, res) {
   var id = req.body.id;
