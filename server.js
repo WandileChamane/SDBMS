@@ -58,7 +58,7 @@ app.post('/register', function (req, res) {
       let transporter = nodeMailer.createTransport({
           host: 'smtp.gmail.com',
           port: 465,
-          secure:false,
+          secure:true,
           auth: {
               user: 'wandile.chamane@gmail.com',
               pass: 'qmhiezalzpxilcph'
