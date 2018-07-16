@@ -124,7 +124,7 @@ app.post('/updateUser', function (req, res) {
     };
  
  db.users.findAndModify({
-    query: { "_id": {$eq:mongojs.ObjectId(id)}},
+    query: { "_id": mongojs.ObjectId(id)},
     update: { $set: updateData },
     new: true
 }, function (err, doc, lastErrorObject) {
