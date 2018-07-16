@@ -151,7 +151,7 @@ app.post('/updateUser', function (req, res) {
 //     }
 //   });
 //    res.json({"status":"Account Updated!"}); 
-// });
+});
 
 app.post('/activate', function (req, res) {
   var id = req.body.id;
