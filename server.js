@@ -56,12 +56,12 @@ app.post('/register', function (req, res) {
       let smskey = "lo1BExSRR6eP64Z0un_Ovw=="
       
       let transporter = nodeMailer.createTransport({
-          host: 'smtp.gmail.com',
-          port: 465,
+          host: 'mail.lethericsolutions.co.za',
+          port: 25,
           secure:true,
           auth: {
-              user: 'wandile.chamane@gmail.com',
-              pass: 'BonganiZulu123@'
+              user: 'sdbms@lethericsolutions.co.za',
+              pass: 'admin@sdbms'
           }
       });
       let mailOptions = {
