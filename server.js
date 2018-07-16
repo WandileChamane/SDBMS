@@ -58,7 +58,7 @@ app.post('/register', function (req, res) {
       let transporter = nodeMailer.createTransport({
           host: 'mail.lethericsolutions.co.za',
           port: 25,
-          secure:true,
+          secure:false,
           auth: {
               user: 'sdbms@lethericsolutions.co.za',
               pass: 'admin@sdbms'
