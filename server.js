@@ -124,13 +124,13 @@ app.post('/updateUser', function (req, res) {
     };
  
  db.users.findAndModify({
-    query: { "_id": mongojs.ObjectId(id)},
+    query: { 'email': req.body.email},
     update: { $set: updateData },
     new: true
 }, function (err, doc, lastErrorObject) {
     // doc.tag === 'maintainer'
   res.json({"status":"Account Updated!"});
-})
+});
  
 //   db.users.update({"_id": {$eq:mongojs.ObjectId(id)}}, {$set:
 //     {
