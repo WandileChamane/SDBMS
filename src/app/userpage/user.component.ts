@@ -80,19 +80,19 @@ export class UserComponent implements OnInit {
     }
     updateUser(d){
         console.log(d);
-            // d["company"] = this.company;
-            // d["username"] = this.username;
-            // d["email"] = this.email;
-            // d["firstname"] = this.firstname;
-            // d["lastname"] = this.lastname;
-            // d["address"] = this.address;
-            // d["city"] = this.city;
-            // d["country"] = this.country;
-            // d["postalcode"] = this.postalcode;
-            // d["phone"] = this.phone; 
-            // d["password"] = this.password;
-            // d["usertype"] = this.usertype;
-            // d["isActivated"] = this.isActivated;
+             d["company"] = this.company;
+             d["username"] = this.username;
+             d["email"] = this.email;
+             d["firstname"] = this.firstname;
+             d["lastname"] = this.lastname;
+             d["address"] = this.address;
+             d["city"] = this.city;
+             d["country"] = this.country;
+             d["postalcode"] = this.postalcode;
+             d["phone"] = this.phone; 
+             d["password"] = this.password;
+             d["usertype"] = this.usertype;
+             d["isActivated"] = this.isActivated;
          console.log("after update: "+d);
     	 this.api.post("/updateUser", d).then(res => {
              this.isUpdated = true;
