@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { UserComponent } from './user.component';
+import { SubscriptionsComponent } from '../subscriptions/subscriptions.component';
 import { UserRoutes } from './user.routing';
 
 @NgModule({
@@ -12,7 +13,7 @@ import { UserRoutes } from './user.routing';
         RouterModule.forChild(UserRoutes),
         FormsModule
     ],
-    declarations: [UserComponent]
+    declarations: [UserComponent, SubscriptionsComponent]
 })
 
 export class UserModule {}

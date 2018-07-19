@@ -10,7 +10,6 @@
             <h4 class="card-title">Edit Profile -
               <small class="category"  *ngIf="!isActivatedMessage && !isUpdated">Complete your profile</small>
               <small class="category"  style="color: green; font-weight: bold;" *ngIf="isActivatedMessage && !isUpdated">Your Account has been Activated!</small>
-
               <small class="category"  style="color: green; font-weight: bold;" *ngIf="isUpdated">Your Account has been Updated!</small>
             </h4>
           </div>
@@ -93,6 +92,7 @@
               <div class="clearfix"></div>
             </form>
           </div>
+          <app-subscriptions></app-subscriptions>
         </div>
       </div>
 <!--       <div class="col-md-4">

@@ -1,0 +1,57 @@
+  <div class="card-header card-header-icon card-header-rose">
+            <div class="card-icon">
+              <i class="material-icons">perm_identity</i>
+            </div>
+            <h4 class="card-title">Bulk Email
+              <small class="category"  style="color: green; font-weight: bold;" *ngIf="isActivatedMessage && !isUpdated">Your Account has been Activated!</small>
+              <small class="category"  style="color: green; font-weight: bold;" *ngIf="isUpdated">Your Account has been Updated!</small>
+            </h4>
+          </div>
+          <div class="card-body">
+            <form  name="editForm" #userData="ngForm" (ngSubmit)="updateUser(userData.value)" enctype="multipart/form-data">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <!-- <label>About Me</label> -->
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Drag file to here, or click to upload. </label>
+                      <input type="file" ịd="file" name="file" class="form-control">
+                      <ul>
+                      	<li *ngFor="let attachment of attachments" style="list-style: none; color: green;">
+                      		{{attachment}}
+                      	</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label></label>
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Type the email body below.</label>
+                      <textarea class="form-control" rows="5"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <!-- <label>About Me</label> -->
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Type user email, seperated by commas if there is more than one. </label>
+                      <input type="text" ịd="file" name="file" (change)="handleFileInput($event.target.files)" placeholder="e.g. emailone@sdbms.co.za, emailtwo@sdbms.co.za,..." class="form-control"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button mat-raised-button type="submit" class="btn btn-blue pull-right">Send email</button>
+              <button mat-raised-button type="submit" class="btn btn-blue pull-right">Send emails to all users</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+
+          <!-- (change)="handleFileInput($event.target.files)" --> 

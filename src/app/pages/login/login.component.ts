@@ -29,7 +29,9 @@ export class LoginComponent implements OnInit, OnDestroy {
           if(res[0] == null) this.noLogin = true
               else{
           this.api.userId = res[0]['_id'];
-          this.router.navigate(['/pages/user/']);
+
+          if(res[0]['isActivated'])
+            this.router.navigate(['/pages/user/']);
           }
       })
     }

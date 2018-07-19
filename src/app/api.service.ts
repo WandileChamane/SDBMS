@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Rx';
 
 // HttpModule
 @Injectable({
@@ -53,4 +54,14 @@ export class ApiService {
          });
       });
   };
+
+  postFile(endpoint,fileToUpload: File){
+    const formData: FormData = new FormData();
+    formData.append('fileKey', fileToUpload, fileToUpload.name);
+    return new Promise((resolve, reject) => {
+       this.http.post(endpoint, formData).subscribe(res => {
+           resolve(res);
+       });
+    });
+  }
 }
