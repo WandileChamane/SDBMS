@@ -15,7 +15,7 @@
                     <!-- <label>About Me</label> -->
                     <div class="form-group">
                       <label class="bmd-label-floating">Drag file to here, or click to upload. </label>
-                      <input type="file" ịd="file" name="file" class="form-control">
+                      <input type="file" ịd="file" ngModel name="file" (change)="onChange($event)" class="form-control">
                       <ul>
                       	<li *ngFor="let attachment of attachments" style="list-style: none; color: green;">
                       		{{attachment}}
