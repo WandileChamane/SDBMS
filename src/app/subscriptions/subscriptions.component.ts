@@ -9,8 +9,15 @@ import { ApiService } from '../api.service';
 })
 export class SubscriptionsComponent implements OnInit {
 
+  formsubmit = this.api.url+'/subscriptions';
   fileToUpload: File = null;
   attachments = ["samusa.pdf","eat.jpg"];
+
+  subscriptionSubmit(formdata){ 
+   this.api.post("/subscriptions", formdata).then(res => {
+              //this.handleFileInput(event.target.files);
+    });
+  }
 
   onChange(event) {
     var files = event.srcElement.files;

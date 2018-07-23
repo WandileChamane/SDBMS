@@ -7,8 +7,8 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var url = require('url');
 var request = require('request');
 //mongodb:/heroku_zqhwnlc1:BonganiZulu12345@ds233571.mlab.com:33571/heroku_zqhwnlc1
-var db = mongojs('mongodb://heroku_zqhwnlc1:9icrop3b7ar3bhri5phsfip0c8@ds233571.mlab.com:33571/heroku_zqhwnlc1', ['users']);
-//var db = mongojs("SDBMS",['users']);
+//var db = mongojs('mongodb://heroku_zqhwnlc1:9icrop3b7ar3bhri5phsfip0c8@ds233571.mlab.com:33571/heroku_zqhwnlc1', ['users']);
+var db = mongojs("SDBMS",['users']);
 var bodyParser = require('body-parser');
 var path = require('path');
 var cors = require('cors');
@@ -30,6 +30,15 @@ app.get('/*', function(req,res) {
  res.sendFile(path.join(__dirname+'/dist/index.html'));
 });
 
+let transporter = nodeMailer.createTransport({
+          host: 'smtp.gmail.com',
+          port: 465,
+          secure:true,
+          auth: {
+              user: 'wandile.chamane@gmail.com',
+              pass: 'qmhiezalzpxilcph'
+          }
+      });
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -54,23 +63,26 @@ var storage = multer.diskStorage({
   });
 
 app.post('/subscriptions', function (req, res) {
-  var file = req.body.file;
-  
-  console.log("formdata"+req.body.file);
-  
+ console.log("formdata");  
   var upload = multer({storage: storage}).single('file');
-
   upload(req, res, (err) => {
     if(err){
-
+       console.log(err);
     }else{
+
+      var emails = req.body.emails.replace(" ","").split(",");
+
+      for(var e; e < emails; e++){
+
+      }
+
+      console.log(req);
       res.json(req.file)
     }
   });
+  //console.log(" File uploading"+req.body);
 
-  console.log(" File uploading"+req.body);
-
-  res.json(file.fieldname);
+  //res.json(file);
 });
 
 app.post('/register', function (req, res) {
@@ -92,15 +104,7 @@ app.post('/register', function (req, res) {
 
       getFormattedHostUrl();
       
-      let transporter = nodeMailer.createTransport({
-          host: 'smtp.gmail.com',
-          port: 465,
-          secure:true,
-          auth: {
-              user: 'wandile.chamane@gmail.com',
-              pass: 'qmhiezalzpxilcph'
-          }
-      });
+      
       let mailOptions = {
           from: '"registrations" <registrations@smbd.com>', // sender address
           to: req.body.email, // list of receivers
