@@ -62,22 +62,49 @@ var storage = multer.diskStorage({
     }
   });
 
-app.post('/subscriptions', function (req, res) {
- console.log("formdata");  
-  var upload = multer({storage: storage}).single('file');
+app.post('/subscriptions', function (req, res) {  
+  var upload = multer({storage: storage}).array('file',10);
   upload(req, res, (err) => {
     if(err){
        console.log(err);
     }else{
 
-      var emails = req.body.emails.replace(" ","").split(",");
+      if(req.body.emails[0] != ""){
+        var emails = req.body.emails.replace(" ","").split(",");
+        console.log("inside email array"+emails[1]);
 
-      for(var e; e < emails; e++){
+        for(var e=0; e < emails.length; e++){
+          console.log("inside email for loop");
+          var file = req.files[e];
+          var attachmentsList = [];
+           for(var f=0;f < req.files.length;f++){
+               attachmentsList.push(
+                  {
+                   'filename':req.files[f].originalname,
+                   'path': req.files[f].path,
+                   'contentType': req.files[f].mimetype
+                  }
+               )
+           }
+          let mailOptions = {
+          from: '"subscriptions" <subscriptions@smbd.com>', // sender address
+          to: emails[e], // list of receivers
+          subject: 'Please find attached.',
+           attachments: attachmentsList, // Subject line
+          //text: req.body.body, // plain text body
+          html: '<p>'+req.body.emailbody+'</p>' // html body
+         };
 
+          transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+              return console.log(error);
+          }
+          console.log('Message %s sent: %s', info.messageId, info.response);
+          res.json(req.file)
+          });
+        }
+        
       }
-
-      console.log(req);
-      res.json(req.file)
     }
   });
   //console.log(" File uploading"+req.body);

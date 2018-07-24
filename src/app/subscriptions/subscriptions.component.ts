@@ -11,18 +11,21 @@ export class SubscriptionsComponent implements OnInit {
 
   formsubmit = this.api.url+'/subscriptions';
   fileToUpload: File = null;
-  attachments = ["samusa.pdf","eat.jpg"];
+  attachments = [];
+
+  queue = [];
 
   subscriptionSubmit(formdata){ 
    this.api.post("/subscriptions", formdata).then(res => {
-              //this.handleFileInput(event.target.files);
+      //this.handleFileInput(event.target.files);
     });
   }
 
   onChange(event) {
-    var files = event.srcElement.files;
-    //console.log(event.target.files);
-    this.handleFileInput(event.target.files);
+    this.attachments = new Array;
+    for(let f=0; f < event.target.files.length; f++){
+      this.attachments.push(event.target.files[f].name);
+    }
   }
   
   handleFileInput(files: FileList) {
