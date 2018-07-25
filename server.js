@@ -7,21 +7,14 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var url = require('url');
 var request = require('request');
 //mongodb:/heroku_zqhwnlc1:BonganiZulu12345@ds233571.mlab.com:33571/heroku_zqhwnlc1
-//var db = mongojs('mongodb://heroku_zqhwnlc1:9icrop3b7ar3bhri5phsfip0c8@ds233571.mlab.com:33571/heroku_zqhwnlc1', ['users']);
-var db = mongojs("SDBMS",['users']);
+var db = mongojs('mongodb://heroku_zqhwnlc1:9icrop3b7ar3bhri5phsfip0c8@ds233571.mlab.com:33571/heroku_zqhwnlc1', ['users']);
+//var db = mongojs("SDBMS",['users']);
 var bodyParser = require('body-parser');
 var path = require('path');
 var cors = require('cors');
 var nodeMailer = require('nodemailer');
 var multer = require('multer');
-// Serve only the static files form the dist directory
-// app.all('*', function(req, res, next) {
-//      var origin = req.get('origin'); 
-//      res.header('Access-Control-Allow-Origin', origin);
-//      res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//      res.header('Access-Control-Allow-Headers', 'Content-Type');
-//      next();
-// });
+
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 app.use(express.static(__dirname + '/dist'));
@@ -62,14 +55,14 @@ var storage = multer.diskStorage({
     }
   });
 
-app.post('/subscriptions', function (req, res) {  
+app.post('/subscriptions', function (req, res) {
   var upload = multer({storage: storage}).array('file',10);
   upload(req, res, (err) => {
     if(err){
        console.log(err);
     }else{
 
-      if(req.body.emails[0] != ""){
+      if(req.body.emails){
         var emails = req.body.emails.replace(" ","").split(",");
         console.log("inside email array"+emails[1]);
 
@@ -100,10 +93,52 @@ app.post('/subscriptions', function (req, res) {
               return console.log(error);
           }
           console.log('Message %s sent: %s', info.messageId, info.response);
+          res.redirect("/pages/subscriptions");
           res.json(req.file)
+
           });
         }
         
+      }else if(!req.body.emails){
+        var emails = [];
+
+        var getEmails = db.users.find({}, function(err, doc) {
+          console.log(doc);
+          emails = [...new Set(doc.map(a => a.email))];
+
+          for(var e=0; e < emails.length; e++){
+          console.log("inside email for loop");
+          var file = req.files[e];
+          var attachmentsList = [];
+           for(var f=0;f < req.files.length;f++){
+               attachmentsList.push(
+                  {
+                   'filename':req.files[f].originalname,
+                   'path': req.files[f].path,
+                   'contentType': req.files[f].mimetype
+                  }
+               )
+           }
+          let mailOptions = {
+          from: '"subscriptions" <subscriptions@smbd.com>', // sender address
+          to: emails[e], // list of receivers
+          subject: 'Please find attached.',
+           attachments: attachmentsList, // Subject line
+          //text: req.body.body, // plain text body
+          html: '<p>'+req.body.emailbody+'</p>' // html body
+         };
+
+          transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+              return console.log(error);
+          }
+          console.log('Message %s sent: %s', info.messageId, info.response);
+           res.json(req.file)
+          });
+        }
+        });
+
+        getEmails;
       }
     }
   });

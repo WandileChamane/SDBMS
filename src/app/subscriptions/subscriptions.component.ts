@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,6 +13,8 @@ export class SubscriptionsComponent implements OnInit {
   formsubmit = this.api.url+'/subscriptions';
   fileToUpload: File = null;
   attachments = [];
+  emails = "";
+
 
   queue = [];
 
@@ -19,6 +22,11 @@ export class SubscriptionsComponent implements OnInit {
    this.api.post("/subscriptions", formdata).then(res => {
       //this.handleFileInput(event.target.files);
     });
+  }
+
+  submitForm(document){
+    document.form.submit;
+    this.router.navigate(['/pages/subscriptions/']);
   }
 
   onChange(event) {
@@ -41,7 +49,7 @@ export class SubscriptionsComponent implements OnInit {
       });
   }
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private router: Router) { }
 
   ngOnInit() {
   }

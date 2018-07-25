@@ -1,9 +1,9 @@
   <div class="card-header card-header-icon card-header-rose">
             <div class="card-icon">
-              <i class="material-icons">perm_identity</i>
+              <i class="material-icons"><!-- perm_identity --></i>
             </div>
-            <h4 class="card-title">Bulk Email
-             <!--  <small class="category"  style="color: green; font-weight: bold;" *ngIf="isActivatedMessage && !isUpdated">Your Account has been Activated!</small>
+            <h4 class="card-title"><!-- Bulk Email -->
+              <!-- <small class="category"  style="color: green; font-weight: bold;" *ngIf="isActivatedMessage && !isUpdated">Your Account has been Activated!</small>
               <small class="category"  style="color: green; font-weight: bold;" *ngIf="isUpdated">Your Account has been Updated!</small> -->
             </h4>
           </div>
@@ -13,8 +13,8 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <!-- <label>About Me</label> -->
-                    <div class="form-group">
-                      <label class="bmd-label-floating">Drag file to here, or click to upload. </label>
+                    <div class="form-group drop-zone">
+                      <label class="bmd-label-floating">Drag and drop files here, or click to upload. </label>
                       <input type="file" ịd="file" name="file" (change)="onChange($event)" multiple class="form-control">
                       <ul>
                       	<li *ngFor="let attachment of attachments" style="list-style: none; color: green;">
@@ -43,13 +43,13 @@
                     <!-- <label>About Me</label> -->
                     <div class="form-group">
                       <label class="bmd-label-floating">Type user email, seperated by commas if there is more than one. </label>
-                      <input type="text" ịd="emails" name="emails" placeholder="e.g. emailone@sdbms.co.za, emailtwo@sdbms.co.za,..." class="form-control"/>
+                      <input type="text" ịd="emails" [(ngModel)]="emails" name="emails" placeholder="e.g. emailone@sdbms.co.za, emailtwo@sdbms.co.za,..." class="form-control"/>
                     </div>
                   </div>
                 </div>
               </div>
-              <button mat-raised-button type="submit" onclick="document.forms[0].submit()" class="btn btn-blue pull-right">Send email</button>
-              <button mat-raised-button type="submit" class="btn btn-blue pull-right">Send emails to all users</button>
+              <button mat-raised-button type="submit" onclick="document.forms[0].submit()" class="btn btn-info pull-right">Send email</button>
+              <button mat-raised-button type="submit" onclick="document.forms[0].submit()" [attr.disabled]="emails !='' ? '':null" class="btn btn-info pull-right">Send emails to all users</button>
               <div class="clearfix"></div>
             </form>
           </div>

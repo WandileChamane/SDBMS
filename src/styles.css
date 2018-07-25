@@ -1,4 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 .form-group input[type=file]{
 	z-index: 0 !important;
+	height: 117px;
+    top: -39px;
+}
+.form-group.drop-zone {
+    /*border-bottom: 1px dashed #ccc;*/
+    height: 68px;
+}
+.sidebar .user .user-info > a {
+    display: block;
+    line-height: 18px;
+    font-size: 14px;
+    padding-top: 20px;
+}
+
+.drop-zone > .bmd-label-floating {
+    display: block;
+    width: 400px;
+    margin-left: 20px;
+    margin-top: 16px;
+    color: #ccc;
+    font-weight: bold;
+    font-size: 17px;
 }
